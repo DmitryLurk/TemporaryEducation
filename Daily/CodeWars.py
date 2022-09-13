@@ -41,3 +41,10 @@ def square_digits(num):
 
 
 square_digits(9119)
+
+
+def basic_op(operator, value1, value2):
+    return print(eval(f'{value1} {operator} {value2}'))
+
+
+basic_op('+', 4, 7)
