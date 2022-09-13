@@ -1,16 +1,16 @@
-#import concurrent.futures
-#import random
-#import threading
-#import time
+# import concurrent.futures
+# import random
+# import threading
+# import time
 #
 #
-#def work(semaphore):
+# def work(semaphore):
 #    time.sleep(random.randint(5, 10))
 #    print('releasing')
 #    semaphore.release()
 #
 #
-#def connect(semaphore, reached_max_connection):
+# def connect(semaphore, reached_max_connection):
 #    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
 #        while True:
 #            connection_counter = 0
@@ -25,7 +25,7 @@
 #            time.sleep(5)
 #
 #
-#def connections_guard(semaphore, reached_max_connection):
+# def connections_guard(semaphore, reached_max_connection):
 #    while True:
 #        print(f'semaphore = {semaphore._value}')
 #        time.sleep(1.5)
@@ -37,7 +37,7 @@
 #            reached_max_connection.clear()
 #
 #
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    max_conection = 10
 #    reached_max_connection = threading.Event()
 #
@@ -46,4 +46,29 @@
 #        executor.submit(connections_guard, semaphore, reached_max_connection)
 #        executor.submit(connect, semaphore, reached_max_connection)
 #
+import threading
+import time
 
+
+class NightClub:
+    def __init__(self):
+        self.bouncer = threading.Semaphore(3)
+
+    def open_club(self):
+        for x in range(1, 51):
+            t = threading.Thread(target=self.guest, args=[x])
+            t.start()
+
+    def guest(self, guest_id):
+        print(f'\nGuest {guest_id} is waiting to entering night club')
+        self.bouncer.acquire()
+
+        print(f'\nGuest {guest_id} is doing some dancing')
+        time.sleep(1)
+
+        print(f'\nGuest {guest_id} is leaving the night club')
+        self.bouncer.release()
+
+if __name__ == '__main__':
+    club = NightClub()
+    club.open_club()
