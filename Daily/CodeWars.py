@@ -48,3 +48,27 @@ def basic_op(operator, value1, value2):
 
 
 basic_op('+', 4, 7)
+
+
+def expanded_form(num):
+    """You will be given a number and you will need to return it as a string in Expanded Form."""
+    num = str(num)
+    counter = len(num)
+    result = ''
+    for i in num:
+        counter -= 1
+        if i not in '0':
+            if counter < 0:
+                counter = 0
+            else:
+                result += str(int(i) * (10 ** counter))
+                if counter != 0:
+                    result += ' + '
+    if result[-3:] == ' + ':
+        return result[:-3]
+    else:
+        return result
+
+
+expanded_form(9000000)
+expanded_form(70304)
