@@ -67,3 +67,29 @@ def expanded_form(num):
 
 expanded_form(9000000)
 expanded_form(70304)
+
+
+def is_valid_walk(walk):
+    """You always walk only a single block for each letter (direction)
+    and you know it takes you one minute to traverse one city block,
+    so create a function that will return true
+    if the walk the app gives you will take you exactly ten minutes
+    (you don't want to be early or late!) and will, of course, return you to your starting point.
+    Return false otherwise."""
+    if len(walk) != 10:
+        return print(False)
+    os_x = 0
+    os_y = 0
+    for i in walk:
+        if i == 'n':
+            os_x += 1
+        elif i == 's':
+            os_x -= 1
+        elif i == 'e':
+            os_y += 1
+        elif i == 'w':
+            os_y -= 1
+    return print(True) if os_x == 0 and os_y == 0 else print(False)
+
+
+is_valid_walk(['n', 's', 'e', 'w', 'n', 's', 'e', 'w', 'n', 's'])
