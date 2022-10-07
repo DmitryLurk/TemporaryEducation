@@ -1,74 +1,13 @@
-# import concurrent.futures
-# import random
-# import threading
-# import time
-#
-#
-# def work(semaphore):
-#    time.sleep(random.randint(5, 10))
-#    print('releasing')
-#    semaphore.release()
-#
-#
-# def connect(semaphore, reached_max_connection):
-#    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
-#        while True:
-#            connection_counter = 0
-#            while not reached_max_connection.is_set():
-#                print(f'\nConnection n={connection_counter}')
-#                semaphore.acquire()
-#                connection_counter += 1
-#
-#                ex.submit(work, semaphore)
-#                time.sleep(0.8)
-#
-#            time.sleep(5)
-#
-#
-# def connections_guard(semaphore, reached_max_connection):
-#    while True:
-#        print(f'semaphore = {semaphore._value}')
-#        time.sleep(1.5)
-#
-#        if semaphore._value == 0:
-#            reached_max_connection.set()
-#            print('max connection')
-#            time.sleep(2)
-#            reached_max_connection.clear()
-#
-#
-# if __name__ == '__main__':
-#    max_conection = 10
-#    reached_max_connection = threading.Event()
-#
-#    semaphore = threading.Semaphore(value=max_conection)
-#    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-#        executor.submit(connections_guard, semaphore, reached_max_connection)
-#        executor.submit(connect, semaphore, reached_max_connection)
-#
-import threading
-import time
+def duplicate_count(text):
+    text = text.lower()
+    p = 0
+    m = set(text.lower())
+    for i in m:
+        if text.count(i) > 1:
+            p += 1
+    print(m)
+    print(text)
+    return print(p)
 
 
-class NightClub:
-    def __init__(self):
-        self.bouncer = threading.Semaphore(3)
-
-    def open_club(self):
-        for x in range(1, 51):
-            t = threading.Thread(target=self.guest, args=[x])
-            t.start()
-
-    def guest(self, guest_id):
-        print(f'\nGuest {guest_id} is waiting to entering night club')
-        self.bouncer.acquire()
-
-        print(f'\nGuest {guest_id} is doing some dancing')
-        time.sleep(1)
-
-        print(f'\nGuest {guest_id} is leaving the night club')
-        self.bouncer.release()
-
-if __name__ == '__main__':
-    club = NightClub()
-    club.open_club()
+duplicate_count("kgBilXIrPjdO60tdsK9ZKl7q81lguMbNtrcBakWJ06WI7pZ02LZEm6WPfx")
