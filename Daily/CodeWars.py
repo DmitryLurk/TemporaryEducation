@@ -93,3 +93,21 @@ def is_valid_walk(walk):
 
 
 is_valid_walk(['n', 's', 'e', 'w', 'n', 's', 'e', 'w', 'n', 's'])
+
+
+def divisors(n):
+    """Count the number of divisors of a positive integer n."""
+    count = 0
+    i = n
+    if n != 1:
+        while i != 0:
+            if i == 0:
+                return print(count)
+            if n % i == 0:
+                count += 1
+                i -= 1
+            else:
+                i -= 1
+        return print(count)
+    else:
+        return print(1)
