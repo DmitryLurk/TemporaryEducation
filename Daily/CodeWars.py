@@ -111,3 +111,13 @@ def divisors(n):
         return print(count)
     else:
         return print(1)
+
+
+def sum_array(arr):
+    """Sum all the numbers of a given array ( cq. list ),
+except the highest and the lowest element ( by value, not by index! ).
+The highest or lowest element respectively is a single element at each
+edge, even if there are more than one with the same value."""
+    if arr == None or len(arr) == 0 or len(arr) == 1:
+        return 0
+    return sum(arr) - max(arr) - min(arr)
