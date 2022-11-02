@@ -121,3 +121,15 @@ edge, even if there are more than one with the same value."""
     if arr == None or len(arr) == 0 or len(arr) == 1:
         return 0
     return sum(arr) - max(arr) - min(arr)
+
+
+def correct(s):
+    """Your task is correct the errors in the digitised text. """
+    result = s
+    mist = {5: "S", 0: "O", 1: "I"}
+    for i in result:
+        try:
+            result = result.replace(i, mist[int(i)])
+        except Exception:
+            pass
+    return print(result)
